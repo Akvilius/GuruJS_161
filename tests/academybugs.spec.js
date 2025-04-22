@@ -1,104 +1,68 @@
 import { expect , test} from '@playwright/test';
+import {App} from '../src/helpers/fixsture.js'
 import { MainPage, ProductPage,  CartPage } from '../src/pages/index';
 //import { test } from '../src/fixture/fixture';
 //import { errors, messages } from '../src/data/messages';
 
+let  app;
 
 test('@Bug Изменить количество отображаемых товаров на странице', async({ page }) => {
-    test.slow();
-    const mainPage = new MainPage(page);
-    await mainPage.changeProductViewAmount();
-    await mainPage.overlay.waitFor({ state: 'visible' });
+
+    app = new App(page);
+    await app.mainPage.open();
+
+    await app.findBagsPage.getThingsOnPage();
     
-    await test.step('Появляется оверлей с сообщением об ошибке', async() => {
-        await expect(app.overlay).toContainText(errors.crushBug);
+    await test.step('Появляется сообщение об ошибке', async() => {
+        await expect(page.getByRole('heading', { name: 'You found a crash bug,' })).toBeVisible();
     });
 });
 
-/*
-test('@Bug Отправить комментарий к товару только с обязательными полями', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
-    await app.productPage.postComment(app.comment.name, app.comment.email);
-    await app.waitForOverlay();
-    
-    await test.step('Появляется оверлей с сообщением об ошибке', async() => {
-        await expect(app.overlay).toContainText(errors.crushBug);
-    });
-});
+test('@Bug Изменить отображение цен товаров в евро', async({ page }) => {
+    app = new App(page);
+    await app.mainPage.open();
 
-test('@Bug Изменить отображение цен товаров в евро', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
+    await app.findBagsPage.goToProduct();
     await app.productPage.changeCurrencyEur();
-    await app.waitForAnotherOverlay();
-
-    await test.step('Появляется оверлей с сообщением об ошибке', async() => {
-        //со стандартной ошибкой почему-то тест не проходит
-        await expect(app.anotherOverlay).toContainText(errors.crushBugShort); 
+ 
+    await test.step('Появляется сообщение об ошибке', async() => {
+        await expect(page.getByRole('heading', { name: 'You found a crash bug,' }).nth(1)).toBeVisible();
     });
 });
 
-test('@Bug Перейти на детальную страницу товара в категории "hot item"', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
+test('@Bug Перейти на детальную страницу товара в категории "hot item"', async({ page }) => {
+    app = new App(page);
+    await app.mainPage.open();
+    await app.findBagsPage.goToProduct();
+
     await app.productPage.goToHotItem();
-    await app.waitForPopUp();
+    
+    await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
+        await expect(app.popUp).toContainText('What did you find out?');
+    });
+});
+
+test('@Bug Перейти на страницу производителя товара', async({ page }) => {
+    app = new App(page);
+    await app.mainPage.open();
+    await app.findBagsPage.goToProduct();
+    await app.productPage.goToManufacturer();
+    //await app.waitForPopUp();
    
     await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
-        await expect(app.popUp).toContainText(messages.bugPopUpMessage);
+        await expect(app.popUp).toContainText('What did you find out?');
     });
+    
 });
 
-test('@Bug Отфильтровать товары по ценовому диапазону "$15.00 - $19.99"', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
+test('@Bug Отфильтровать товары по ценовому диапазону "$15.00 - $19.99"', async({ page }) => {
+    app = new App(page);
+    await app.mainPage.open();
+    await app.findBagsPage.goToProduct();
     await app.productPage.filterPriceRange();
-    await app.waitForPopUp();
+    //await app.waitForPopUp();
  
     await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
-        await expect(app.popUp).toContainText(messages.bugPopUpMessage);
+        await expect(app.popUp).toContainText('What did you find out?');
     });
 });
-
-test('@Bug Перейти на страницу производителя товара', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
-    await app.productPage.goToManufacturer();
-    await app.waitForPopUp();
-   
-    await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
-        await expect(app.popUp).toContainText(messages.bugPopUpMessage);
-    });
-    
-});
-
-test('@Bug Увеличить количество товара в корзине больше чем на 1 единицу', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
-    await app.productPage.addToCart();
-    await app.waitForCart();
-    await app.cartPage.changeAmount('5');
-    await app.cartPage.updateAmount();
-    await app.waitForCongratsPopUp();
-
-    await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
-        await expect(app.congratsPopUp).toContainText(messages.firstCongrats);
-    });
-
-});
-
-test('@Bug Проверить отображение итоговой цены заказа', async({ app }) => {
-    test.slow();
-    await app.mainPage.goToProductPage();
-    await app.productPage.addToCart();
-    await app.waitForCart();
-    await app.cartPage.checkTotalPrice();
-    await app.waitForPopUp();
-  
-    await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
-        await expect(app.popUp).toContainText(messages.bugPopUpMessage);
-    });
-});
-
-*/

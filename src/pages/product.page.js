@@ -9,7 +9,8 @@ export class ProductPage {
 
         this.currencyDropdown = page.locator('#ec_currency_conversion');
 
-        this.hotItemLink = page.getByRole('link', { name: 'Anchor Bracelet'});
+        this.hotItemLink = page.locator('#ec_image_product_widget_anchor-bracelet_1_0');
+      
         this.signUpLink = page.getByRole('link', { name : 'Sign Up'})
         this.manufacturerLink = page.getByRole('link', { name : 'DNK'});
         this.priceFilterLink = page.getByRole('link', { name: '$15.00 - $19.99 (1)'});
@@ -18,6 +19,9 @@ export class ProductPage {
         this.emailField = page.getByRole('textbox', { name: 'Email' });
         
         this.hotItemLoader = page.locator('#post-1820 span');
+
+        //await page.locator('#ec_currency_conversion').selectOption('EUR');
+        //await page.getByRole('heading', { name: 'You found a crash bug,' }).nth(1).click();
     };
     
     async postComment(name, email){
