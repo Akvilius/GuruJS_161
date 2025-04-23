@@ -1,6 +1,5 @@
 import { expect , test} from '@playwright/test';
 import {App} from '../src/helpers/fixsture.js'
-import { MainPage, ProductPage,  CartPage } from '../src/pages/index';
 //import { test } from '../src/fixture/fixture';
 //import { errors, messages } from '../src/data/messages';
 
