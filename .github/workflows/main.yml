@@ -55,7 +55,7 @@ jobs:
           path: gh-pages
           retention-days: 20
   #Формируем отчёт из allure-results
-      - uses: simple:elf/allure-report-action@master
+      - uses: simple-elf/allure-report-action@master
         if: always()
         id: allure-report
         with:
