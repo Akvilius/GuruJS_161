@@ -24,5 +24,5 @@ jobs:
       - name: Установить PW
         run: npx playwright install --with-deps
       - name: Запустить PW
-        run: npx tun test
+        run: npx run test
       
