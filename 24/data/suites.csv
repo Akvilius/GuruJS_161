@@ -1,0 +1,6 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","5766","@Bug Изменить количество отображаемых товаров на странице","chromium","Mon Apr 28 16:10:09 GMT 2025","passed","Mon Apr 28 16:10:15 GMT 2025","","academybugs.spec.js","",""
+"","9790","@Bug Отфильтровать товары по ценовому диапазону ""$15.00 - $19.99""","chromium","Mon Apr 28 16:10:32 GMT 2025","passed","Mon Apr 28 16:10:41 GMT 2025","","academybugs.spec.js","",""
+"","16703","@Bug Перейти на детальную страницу товара в категории ""hot item""","chromium","Mon Apr 28 16:10:15 GMT 2025","passed","Mon Apr 28 16:10:32 GMT 2025","","academybugs.spec.js","",""
+"","8555","@Bug Изменить отображение цен товаров в евро","chromium","Mon Apr 28 16:10:09 GMT 2025","passed","Mon Apr 28 16:10:17 GMT 2025","","academybugs.spec.js","",""
+"","15661","@Bug Перейти на страницу производителя товара","chromium","Mon Apr 28 16:10:18 GMT 2025","passed","Mon Apr 28 16:10:33 GMT 2025","","academybugs.spec.js","",""
