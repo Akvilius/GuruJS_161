@@ -1,7 +1,5 @@
 import { expect , test} from '@playwright/test';
 import {App} from '../src/helpers/fixsture.js'
-//import { test } from '../src/fixture/fixture';
-//import { errors, messages } from '../src/data/messages';
 
 let  app;
 
@@ -9,23 +7,22 @@ test('@Bug Изменить количество отображаемых тов
 
     app = new App(page);
     await app.mainPage.open();
-
     await app.findBagsPage.getThingsOnPage();
     
     await test.step('Появляется сообщение об ошибке', async() => {
-        await expect(page.getByRole('heading', { name: 'You found a crash bug,' })).toBeVisible();
+        await expect(app.findBagsPage.mistakeMessage).toBeVisible();
     });
 });
 
 test('@Bug Изменить отображение цен товаров в евро', async({ page }) => {
     app = new App(page);
     await app.mainPage.open();
-
     await app.findBagsPage.goToProduct();
     await app.productPage.changeCurrencyEur();
  
     await test.step('Появляется сообщение об ошибке', async() => {
-        await expect(page.getByRole('heading', { name: 'You found a crash bug,' }).nth(1)).toBeVisible();
+        await expect(app.findBagsPage.mistakeMessage.nth(1)).toBeVisible();
+
     });
 });
 
@@ -33,7 +30,6 @@ test('@Bug Перейти на детальную страницу товара 
     app = new App(page);
     await app.mainPage.open();
     await app.findBagsPage.goToProduct();
-
     await app.productPage.goToHotItem();
     
     await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
@@ -46,7 +42,6 @@ test('@Bug Перейти на страницу производителя то�
     await app.mainPage.open();
     await app.findBagsPage.goToProduct();
     await app.productPage.goToManufacturer();
-    //await app.waitForPopUp();
    
     await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
         await expect(app.popUp).toContainText('What did you find out?');
@@ -59,7 +54,6 @@ test('@Bug Отфильтровать товары по ценовому диа�
     await app.mainPage.open();
     await app.findBagsPage.goToProduct();
     await app.productPage.filterPriceRange();
-    //await app.waitForPopUp();
  
     await test.step('Появляется поп-ап для выбора типа и описания бага', async() => {
         await expect(app.popUp).toContainText('What did you find out?');
