@@ -5,9 +5,10 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+/src\helpers\builder/
 
 #allure
 /allure-results/
 /allure-report/
-
+/.allure/
 /tests-examples/

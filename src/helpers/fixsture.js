@@ -6,7 +6,6 @@ export class App {
         this.page = page;
         this.mainPage = new MainPage(page);
         this.findBagsPage = new FindBagsPage(page);
-       // this.myCartPage = new MyCartPage(page);
         this.productPage = new ProductPage(page);
 
         this.popUp = page.locator('#bug-popup');
